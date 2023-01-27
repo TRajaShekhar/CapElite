@@ -1,0 +1,22 @@
+class Solution {
+    public int longestSubstring(String s, int k) {
+        HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+        if(s==null || k>s.length()){
+            return 0;
+        }
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        }
+
+        int value=0;
+        while(value<s.length() && map.get(s.charAt(value))>=k){
+            ++value;
+        }
+        if(value>s.length()-1){
+            return value;
+        }
+        int res=longestSubstring(s.substring(0,value),k);
+        int res2=longestSubstring(s.substring(value+1),k);
+        return Math.max(res,res2);
+    }
+}
