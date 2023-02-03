@@ -1,5 +1,26 @@
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
+       if(head==null)return null;
+       return covertListtoBST(head,null);
+    }
+    public TreeNode covertListtoBST(ListNode head,ListNode tail){
+        ListNode fast=head;
+        ListNode slow=head;
+        if(head==tail)return null;
+        while(fast!=tail && fast.next!=tail){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        TreeNode root=new TreeNode(slow.val);
+        root.left=covertListtoBST(head,slow);
+        root.right=covertListtoBST(slow.next,tail);
+        return root;
+    }
+}
+
+//Method2
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
         List<Integer> arr=new ArrayList<Integer>();
         if(head==null)return null;
         ListNode curr=head;
