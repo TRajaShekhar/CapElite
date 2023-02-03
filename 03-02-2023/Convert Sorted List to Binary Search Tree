@@ -1,0 +1,24 @@
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        List<Integer> arr=new ArrayList<Integer>();
+        if(head==null)return null;
+        ListNode curr=head;
+         arr.add(curr.val);
+        while(curr.next!=null){
+           
+            curr=curr.next;
+             arr.add(curr.val);
+        }
+        return convertarrtoBST(arr,0,arr.size()-1);        
+    }
+    public TreeNode convertarrtoBST(List<Integer> arr,int start,int end){
+        if(start>end)return null;
+         
+        int mid=(start+end)/2;
+        TreeNode newnode=new TreeNode(arr.get(mid));
+        newnode.left=convertarrtoBST(arr,start,mid-1);
+        newnode.right=convertarrtoBST(arr,mid+1,end);
+        System.out.println(newnode);
+        return newnode;
+    }
+}
