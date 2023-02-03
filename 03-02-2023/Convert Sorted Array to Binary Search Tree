@@ -1,0 +1,14 @@
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if(nums.length==0)return null;
+        return ConvertArrtoheightBalancedtree(nums,0,nums.length-1);
+    }
+    public TreeNode ConvertArrtoheightBalancedtree(int[] nums,int start,int end){
+        if(start>end)return null;
+        int mid=(start+end)/2;
+        TreeNode newnode=new TreeNode(nums[mid]);
+        newnode.left=ConvertArrtoheightBalancedtree(nums,start,mid-1);
+        newnode.right=ConvertArrtoheightBalancedtree(nums,mid+1,end);
+        return newnode;
+    }
+}
